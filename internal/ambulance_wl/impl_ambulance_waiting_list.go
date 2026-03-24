@@ -268,6 +268,10 @@ func (o *implAmbulanceWaitingListAPI) UpdateWaitingListEntry(c *gin.Context) {
             }, http.StatusNotFound
         }
 
+        if entry.Name != "" {
+            ambulance.WaitingList[entryIndx].Name = entry.Name
+        }
+
         if entry.PatientId != "" {
             ambulance.WaitingList[entryIndx].PatientId = entry.PatientId
         }
@@ -282,6 +286,10 @@ func (o *implAmbulanceWaitingListAPI) UpdateWaitingListEntry(c *gin.Context) {
 
         if entry.EstimatedDurationMinutes > 0 {
             ambulance.WaitingList[entryIndx].EstimatedDurationMinutes = entry.EstimatedDurationMinutes
+        }
+
+        if entry.Condition.Value != "" {
+            ambulance.WaitingList[entryIndx].Condition = entry.Condition
         }
 
         ambulance.reconcileWaitingList()
