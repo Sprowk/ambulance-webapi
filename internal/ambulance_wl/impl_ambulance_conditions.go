@@ -13,6 +13,17 @@ func NewAmbulanceConditionsApi() AmbulanceConditionsAPI {
     return &implAmbulanceConditionsAPI{}
 }
 
-func (o implAmbulanceConditionsAPI) GetConditions(c *gin.Context) {
-    c.AbortWithStatus(http.StatusNotImplemented)
+// GetConditions - Provides the list of conditions associated with ambulance
+func (o *implAmbulanceConditionsAPI) GetConditions(c *gin.Context) {
+    // update ambulance document
+    updateAmbulanceFunc(c, func(
+        c *gin.Context,
+        ambulance *Ambulance,
+    ) (updatedAmbulance *Ambulance, responseContent interface{}, status int) {
+        result := ambulance.PredefinedConditions
+        if result == nil {
+            result = []Condition{}
+        }
+        return nil, result, http.StatusOK
+    })
 }
