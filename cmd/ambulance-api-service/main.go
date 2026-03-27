@@ -23,7 +23,7 @@ import (
 func main() {
     output := zerolog.ConsoleWriter{Out: os.Stdout, TimeFormat: zerolog.TimeFormatUnix}
     log.Logger = zerolog.New(output).With().
-        Str("service", "ambulance-wl-list").
+        Str("service", "blood-bank-api").
         Timestamp().
         Caller().
         Logger()
@@ -71,7 +71,7 @@ func main() {
     }
     engine := gin.New()
     engine.Use(gin.Recovery())
-    engine.Use(otelgin.Middleware("ambulance-webapi"))
+    engine.Use(otelgin.Middleware("blood-bank-webapi"))
 
     corsMiddleware := cors.New(cors.Config{
         AllowOrigins:     []string{"*"},
@@ -84,7 +84,7 @@ func main() {
     engine.Use(corsMiddleware)
 
     // setup context update  middleware
-    dbService := db_service.NewMongoService[blood_bank.Ambulance](db_service.MongoServiceConfig{})
+    dbService := db_service.NewMongoService[blood_bank.BloodBank](db_service.MongoServiceConfig{})
     defer dbService.Disconnect(context.Background())
     engine.Use(func(ctx *gin.Context) {
         ctx.Set("db_service", dbService)
@@ -92,9 +92,8 @@ func main() {
     })
     // request routings
     handleFunctions := &blood_bank.ApiHandleFunctions{
-        AmbulanceConditionsAPI:  blood_bank.NewAmbulanceConditionsApi(),
-        AmbulanceWaitingListAPI: blood_bank.NewAmbulanceWaitingListApi(),
-        AmbulancesAPI:           blood_bank.NewAmbulancesApi(),
+        BloodBankBagsAPI: blood_bank.NewBloodBankBagsApi(),
+        BloodBanksAPI:    blood_bank.NewBloodBanksApi(),
     }
     blood_bank.NewRouterWithGinEngine(engine, *handleFunctions)
     engine.GET("/openapi", api.HandleOpenApi)
