@@ -16,7 +16,7 @@ import (
     tracesdk "go.opentelemetry.io/otel/sdk/trace"
     metricsdk "go.opentelemetry.io/otel/sdk/metric"
     "github.com/Sprowk/ambulance-webapi/api"
-    "github.com/Sprowk/ambulance-webapi/internal/ambulance_wl"
+    blood_bank "github.com/Sprowk/ambulance-webapi/internal/blood_bank"
     "github.com/Sprowk/ambulance-webapi/internal/db_service"
 )
 
@@ -84,19 +84,19 @@ func main() {
     engine.Use(corsMiddleware)
 
     // setup context update  middleware
-    dbService := db_service.NewMongoService[ambulance_wl.Ambulance](db_service.MongoServiceConfig{})
+    dbService := db_service.NewMongoService[blood_bank.Ambulance](db_service.MongoServiceConfig{})
     defer dbService.Disconnect(context.Background())
     engine.Use(func(ctx *gin.Context) {
         ctx.Set("db_service", dbService)
         ctx.Next()
     })
     // request routings
-    handleFunctions := &ambulance_wl.ApiHandleFunctions{
-        AmbulanceConditionsAPI:  ambulance_wl.NewAmbulanceConditionsApi(),
-        AmbulanceWaitingListAPI: ambulance_wl.NewAmbulanceWaitingListApi(),
-        AmbulancesAPI:           ambulance_wl.NewAmbulancesApi(),
+    handleFunctions := &blood_bank.ApiHandleFunctions{
+        AmbulanceConditionsAPI:  blood_bank.NewAmbulanceConditionsApi(),
+        AmbulanceWaitingListAPI: blood_bank.NewAmbulanceWaitingListApi(),
+        AmbulancesAPI:           blood_bank.NewAmbulancesApi(),
     }
-    ambulance_wl.NewRouterWithGinEngine(engine, *handleFunctions)
+    blood_bank.NewRouterWithGinEngine(engine, *handleFunctions)
     engine.GET("/openapi", api.HandleOpenApi)
     engine.Run(":" + port)
 }

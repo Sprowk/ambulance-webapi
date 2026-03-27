@@ -29,7 +29,7 @@ jobs:
       with:
         generator: go-gin-server
         input: api/ambulance-wl.openapi.yaml
-        additional-properties: apiPath=internal/ambulance_wl,packageName=ambulance_wl,interfaceOnly=true
+        additional-properties: apiPath=internal/blood_bank,packageName=blood_bank,interfaceOnly=true
 
     - name: Build
       # build api service

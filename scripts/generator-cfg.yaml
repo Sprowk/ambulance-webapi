@@ -3,6 +3,6 @@ outputDir: /local
 inputSpec: /local/api/ambulance-wl.openapi.yaml
 enablePostProcessFile: true
 additionalProperties:
-  apiPath: internal/ambulance_wl
-  packageName: ambulance_wl
+  apiPath: internal/blood_bank
+  packageName: blood_bank
   interfaceOnly: true

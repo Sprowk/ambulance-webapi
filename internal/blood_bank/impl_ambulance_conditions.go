@@ -1,4 +1,4 @@
-package ambulance_wl
+package blood_bank
 
 import (
     "net/http"
