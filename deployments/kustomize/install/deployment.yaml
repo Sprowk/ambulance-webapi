@@ -55,8 +55,8 @@ spec:
             memory: "256Mi"
             cpu: "0.1"
       containers:
-      - name: cv3am-ambulance-wl-webapi-container
-        image: sprowk/ambulance-wl-webapi:latest
+      - name: cv3am-ambulance-bb-webapi-container
+        image: sprowk/ambulance-bb-webapi:latest
         imagePullPolicy: Always
         ports:
         - name: webapi-port

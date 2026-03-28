@@ -43,8 +43,8 @@ FROM scratch
 
 # see https://github.com/opencontainers/image-spec/blob/main/annotations.md for details
 LABEL org.opencontainers.image.authors="Your Name"
-LABEL org.opencontainers.image.title="Ambulance Waiting List WebAPI Service"
-LABEL org.opencontainers.image.description="WEBAPI for managing entries in ambulances` waiting list"
+LABEL org.opencontainers.image.title="Blood Bank WebAPI Service"
+LABEL org.opencontainers.image.description="WEBAPI for managing blood bags in a blood bank"
 
 # to avoid connection errors in standalone case otel exporters are disabled by default
 ENV OTEL_TRACES_EXPORTER=none
@@ -52,14 +52,14 @@ ENV OTEL_METRICS_EXPORTER=none
 ENV OTEL_LOGS_EXPORTER=none
 ENV LOG_LEVEL=info
 
-ENV OTEL_SERVICE_NAME=ambulance-wl-api
+ENV OTEL_SERVICE_NAME=blood-bank-api
 # list all variables and their default values for clarity
 ENV AMBULANCE_API_ENVIRONMENT=production
 ENV AMBULANCE_API_PORT=8080
 ENV AMBULANCE_API_MONGODB_HOST=mongo
 ENV AMBULANCE_API_MONGODB_PORT=27017
-ENV AMBULANCE_API_MONGODB_DATABASE=cv3am-ambulance
-ENV AMBULANCE_API_MONGODB_COLLECTION=ambulance
+ENV AMBULANCE_API_MONGODB_DATABASE=cv3am-blood-bank
+ENV AMBULANCE_API_MONGODB_COLLECTION=blood-bank
 ENV AMBULANCE_API_MONGODB_USERNAME=root
 ENV AMBULANCE_API_MONGODB_PASSWORD=
 ENV AMBULANCE_API_MONGODB_TIMEOUT_SECONDS=5

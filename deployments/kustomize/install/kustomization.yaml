@@ -11,8 +11,8 @@ configMapGenerator:
       - params/init-db.js
   - name: cv3am-ambulance-webapi-config
     literals:
-      - database=cv3am-ambulance
-      - collection=ambulance
+      - database=cv3am-blood-bank
+      - collection=blood-bank
 patches:
 - path: patches/webapi.deployment.yaml
   target:

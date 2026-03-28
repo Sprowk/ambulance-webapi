@@ -44,12 +44,29 @@ db[collection].createIndex({ "id": 1 })
 //insert sample data
 let result = db[collection].insertMany([
     {
-        "id": "bobulova",
-        "name": "Dr.Bobulová",
-        "roomNumber": "123",
-        "predefinedConditions": [
-            { "value": "Nádcha", "code": "rhinitis" },
-            { "value": "Kontrola", "code": "checkup" }
+        "id": "centralna-banka",
+        "name": "Centralna krvna banka",
+        "bloodBags": [
+            {
+                "id": "bag-001",
+                "bloodGroup": "A",
+                "rhFactor": "positive",
+                "collectionDate": new Date().toISOString(),
+                "volume": 450,
+                "status": "available",
+                "donorId": "donor-001",
+                "createdAt": new Date().toISOString()
+            },
+            {
+                "id": "bag-002",
+                "bloodGroup": "O",
+                "rhFactor": "negative",
+                "collectionDate": new Date().toISOString(),
+                "volume": 350,
+                "status": "available",
+                "donorId": "donor-002",
+                "createdAt": new Date().toISOString()
+            }
         ]
     }
 ]);
