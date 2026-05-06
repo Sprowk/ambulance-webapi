@@ -93,6 +93,12 @@ paths:
           schema:
             type: string
             enum: [positive, negative]
+        - in: query
+          name: status
+          description: filter by status
+          schema:
+            type: string
+            enum: [available, reserved, issued, expired, destroyed]
       responses:
         "200":
           description: list of blood bags

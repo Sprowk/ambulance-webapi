@@ -150,14 +150,18 @@ func (o *implBloodBankBagsAPI) GetBloodBags(c *gin.Context) {
 
 		bloodGroup := c.Query("bloodGroup")
 		rhFactor := c.Query("rhFactor")
+		status := c.Query("status")
 
-		if bloodGroup != "" || rhFactor != "" {
+		if bloodGroup != "" || rhFactor != "" || status != "" {
 			filtered := []BloodBag{}
 			for _, bag := range result {
 				if bloodGroup != "" && bag.BloodGroup != bloodGroup {
 					continue
 				}
 				if rhFactor != "" && bag.RhFactor != rhFactor {
+					continue
+				}
+				if status != "" && bag.Status != status {
 					continue
 				}
 				filtered = append(filtered, bag)
