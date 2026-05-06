@@ -253,6 +253,13 @@ func (o *implBloodBankBagsAPI) UpdateBloodBag(c *gin.Context) {
 			bloodBank.BloodBags[bagIdx].RhFactor = bag.RhFactor
 		}
 
+		if bag.Volume < 0 {
+			return nil, gin.H{
+				"status":  http.StatusBadRequest,
+				"message": "Volume must be greater than 0",
+			}, http.StatusBadRequest
+		}
+
 		if bag.Volume > 0 {
 			bloodBank.BloodBags[bagIdx].Volume = bag.Volume
 		}
