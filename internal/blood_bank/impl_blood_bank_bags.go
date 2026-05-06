@@ -96,10 +96,10 @@ func (o *implBloodBankBagsAPI) CreateBloodBag(c *gin.Context) {
 			}, http.StatusBadRequest
 		}
 
-		if bag.Volume <= 0 {
+		if bag.Volume <= 0 || bag.Volume > 2000 {
 			return nil, gin.H{
 				"status":  http.StatusBadRequest,
-				"message": "Volume must be greater than 0",
+				"message": "Volume must be between 1 and 2000 ml",
 			}, http.StatusBadRequest
 		}
 
@@ -257,10 +257,10 @@ func (o *implBloodBankBagsAPI) UpdateBloodBag(c *gin.Context) {
 			bloodBank.BloodBags[bagIdx].RhFactor = bag.RhFactor
 		}
 
-		if bag.Volume < 0 {
+		if bag.Volume < 0 || bag.Volume > 2000 {
 			return nil, gin.H{
 				"status":  http.StatusBadRequest,
-				"message": "Volume must be greater than 0",
+				"message": "Volume must be between 1 and 2000 ml",
 			}, http.StatusBadRequest
 		}
 
